@@ -1,15 +1,14 @@
 package com.mqz.service;
 
+import com.mqz.dto.request.UpdateAccountRequest;
 import com.mqz.entity.Account;
-import com.mqz.record.AccountRequest;
-
-import java.util.Optional;
+import com.mqz.dto.request.CreateAccountRequest;
 
 public interface AccountService {
 
-    Optional<Account> getAccountByAccountId(Long id);
-    Account createAccount(AccountRequest accountRequest);
-    Account updateAccount(Long id, AccountRequest accountRequest);
+    Account getAccountByAccountId(Long id);
+    Account createAccount(CreateAccountRequest accountRequest);
+    Account updateAccount(Long id, UpdateAccountRequest accountRequest);
     void deleteAccount(Long id);
 
 }

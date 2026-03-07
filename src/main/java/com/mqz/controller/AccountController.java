@@ -1,16 +1,15 @@
 package com.mqz.controller;
 
+import com.mqz.dto.request.UpdateAccountRequest;
 import com.mqz.entity.Account;
-import com.mqz.record.AccountRequest;
+import com.mqz.dto.request.CreateAccountRequest;
 import com.mqz.service.AccountService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 @RequiredArgsConstructor
 @RestController
@@ -25,20 +24,21 @@ public class AccountController {
     @GetMapping("/accounts/{id}")
     public ResponseEntity<Account> getAccount(@PathVariable("id") Long id) {
         logger.info("Received getAccount request for Account ID: {}", id);
-        return ResponseEntity.ok(accountService.getAccountByAccountId(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found")));
+        return ResponseEntity.ok(accountService.getAccountByAccountId(id));
     }
 
     @PostMapping("/accounts")
-    public ResponseEntity<Account> createAccount(@Valid @RequestBody AccountRequest account) {
+    public ResponseEntity<Account> createAccount(@Valid @RequestBody CreateAccountRequest account) {
         logger.info("Received createAccount request for Account Name: {}", account.name());
+        logger.info("Request Body: {}", account);
         return ResponseEntity.ok(accountService.createAccount(account));
     }
 
     @PatchMapping("/accounts/{id}")
     public ResponseEntity<Account> updateAccount(@PathVariable("id") Long id,
-                                                 @Valid @RequestBody AccountRequest account) {
+                                                 @Valid @RequestBody UpdateAccountRequest account) {
         logger.info("Received updateAccount request for Account ID: {}", id);
+        logger.info("Request Body: {}", account);
         return ResponseEntity.ok(accountService.updateAccount(id, account));
     }
 

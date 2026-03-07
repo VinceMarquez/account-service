@@ -25,7 +25,6 @@ public class Account {
     String name;
 
     @Column(name = "birth_date", nullable = false)
-    @NotNull
     LocalDate birthDate;
 
 }
