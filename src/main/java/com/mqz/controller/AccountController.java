@@ -21,20 +21,20 @@ public class AccountController {
 
     private final AccountService accountService;
 
-    @GetMapping("/accounts/{id}")
+    @GetMapping("/account/{id}")
     public ResponseEntity<Account> getAccount(@PathVariable("id") Long id) {
         logger.info("Received getAccount request for Account ID: {}", id);
         return ResponseEntity.ok(accountService.getAccountByAccountId(id));
     }
 
-    @PostMapping("/accounts")
+    @PostMapping("/account")
     public ResponseEntity<Account> createAccount(@Valid @RequestBody CreateAccountRequest account) {
         logger.info("Received createAccount request for Account Name: {}", account.name());
         logger.info("Request Body: {}", account);
         return ResponseEntity.ok(accountService.createAccount(account));
     }
 
-    @PatchMapping("/accounts/{id}")
+    @PatchMapping("/account/{id}")
     public ResponseEntity<Account> updateAccount(@PathVariable("id") Long id,
                                                  @Valid @RequestBody UpdateAccountRequest account) {
         logger.info("Received updateAccount request for Account ID: {}", id);
@@ -42,7 +42,7 @@ public class AccountController {
         return ResponseEntity.ok(accountService.updateAccount(id, account));
     }
 
-    @DeleteMapping("/accounts/{id}")
+    @DeleteMapping("/account/{id}")
     public ResponseEntity<Void> deleteAccount(@PathVariable("id") Long id) {
         logger.info("Received deleteAccount request for Account ID: {}", id);
         accountService.deleteAccount(id);
